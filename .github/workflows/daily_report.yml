@@ -1,0 +1,50 @@
+name: Daily Stock RSS Reporter
+
+# 設定觸發時間
+on:
+  schedule:
+    # 這是 UTC 時間。Brisbane 是 UTC+10
+    # 所以要早上 8:00 Brisbane 時間執行，對應的 UTC 時間是前一天的 22:00
+    - cron: '0 22 * * *'
+  # 允許手動點擊觸發 (方便測試)
+  workflow_dispatch:
+
+jobs:
+  build-and-send:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip' # 加上快取可加快安裝速度
+          
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Create config.json from secrets
+        run: |
+          cat << EOF > config.json
+          {
+              "targets": [
+                  { "symbol": "GC=F", "name": "黃金 (Gold)", "type": "commodity" },
+                  { "symbol": "BTC-USD", "name": "比特幣 (Bitcoin)", "type": "crypto" },
+                  { "symbol": "^GSPC", "name": "S&P 500 指數", "type": "index" },
+                  { "symbol": "AAPL", "name": "蘋果公司 (Apple)", "type": "stock" },
+                  { "symbol": "2800.HK", "name": "盈富基金", "type": "stock" }
+              ],
+              "telegram": {
+                  "bot_token": "${{ secrets.TG_BOT_TOKEN }}",
+                  "chat_id": "${{ secrets.TG_CHAT_ID }}"
+              }
+          }
+          EOF
+          
+      - name: Run Main Script
+        run: python main.py

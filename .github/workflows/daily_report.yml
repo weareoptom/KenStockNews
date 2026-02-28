@@ -28,23 +28,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      - name: Create config.json from secrets
+      - name: Inject Secrets into config.json
         run: |
-          cat << EOF > config.json
-          {
-              "targets": [
-                  { "symbol": "GC=F", "name": "黃金 (Gold)", "type": "commodity" },
-                  { "symbol": "BTC-USD", "name": "比特幣 (Bitcoin)", "type": "crypto" },
-                  { "symbol": "^GSPC", "name": "S&P 500 指數", "type": "index" },
-                  { "symbol": "AAPL", "name": "蘋果公司 (Apple)", "type": "stock" },
-                  { "symbol": "2800.HK", "name": "盈富基金", "type": "stock" }
-              ],
-              "telegram": {
-                  "bot_token": "${{ secrets.TG_BOT_TOKEN }}",
-                  "chat_id": "${{ secrets.TG_CHAT_ID }}"
-              }
-          }
-          EOF
+          # 讀取原本的 config.json，並將 secrets 注入進去
+          python -c "
+          import json
+          import os
+          
+          with open('config.json', 'r', encoding='utf-8') as f:
+              data = json.load(f)
+              
+          data['telegram']['bot_token'] = os.environ.get('TG_BOT_TOKEN')
+          data['telegram']['chat_id'] = os.environ.get('TG_CHAT_ID')
+          
+          with open('config.json', 'w', encoding='utf-8') as f:
+              json.dump(data, f, ensure_ascii=False, indent=4)
+          "
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           
       - name: Run Main Script
         run: python main.py

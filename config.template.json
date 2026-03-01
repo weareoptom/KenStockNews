@@ -1,0 +1,13 @@
+{
+    "targets": [
+        { "symbol": "GC=F", "name": "黃金 (Gold)", "type": "commodity" },
+        { "symbol": "BTC-USD", "name": "比特幣 (Bitcoin)", "type": "crypto" },
+        { "symbol": "^GSPC", "name": "S&P 500 指數", "type": "index" },
+        { "symbol": "AAPL", "name": "蘋果公司 (Apple)", "type": "stock" },
+        { "symbol": "2800.HK", "name": "盈富基金", "type": "stock" }
+    ],
+    "telegram": {
+        "bot_token": "",
+        "chat_id": ""
+    }
+}

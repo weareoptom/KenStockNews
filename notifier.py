@@ -19,8 +19,8 @@ def send_telegram_message(bot_token, chat_id, message):
     try:
         response = requests.post(url, json=payload, timeout=10)
         if response.status_code == 200:
-            print("✅ Telegram 訊息發送成功！")
+            print("Telegram 訊息發送成功！ [SUCCESS]")
         else:
-            print(f"❌ 發送失敗，狀態碼：{response.status_code}, 回應：{response.text}")
+            print(f"發送失敗，狀態碼：{response.status_code}, 回應：{response.text} [FAILED]")
     except Exception as e:
-        print(f"❌ Telegram 發送發生錯誤：{e}")
+        print(f"Telegram 發送發生錯誤：{e} [ERROR]")

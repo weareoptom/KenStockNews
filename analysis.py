@@ -31,9 +31,9 @@ def compute_indicators(hist):
     # RSI 訊號判斷
     if pd.notna(latest_rsi):
         if latest_rsi > 70:
-            signals.append("RSI 超買 (>70)，短期可能回調")
+            signals.append("RSI 超買 (大於 70)，短期可能回調")
         elif latest_rsi < 30:
-            signals.append("RSI 超賣 (<30)，短期可能反彈")
+            signals.append("RSI 超賣 (小於 30)，短期可能反彈")
             
     # 均線多空判斷
     if pd.notna(ma20) and pd.notna(prev_ma20):

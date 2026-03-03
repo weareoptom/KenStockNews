@@ -1,20 +1,28 @@
 import requests
 import sys
 import json
+import urllib.parse
 
 def search_symbol(query):
-    url = f"https://query1.finance.yahoo.com/v1/finance/search?q={query}&quotesCount=10&newsCount=0"
+    # 讓 requests 自動處理編碼問題，不要手動 quote
+    url = "https://query2.finance.yahoo.com/v1/finance/search"
+    params = {
+        "q": query,
+        "quotesCount": 10,
+        "newsCount": 0
+    }
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
     try:
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, params=params, headers=headers, timeout=10)
     except Exception as e:
         print(f"網路連線錯誤: {e}")
         return
     
     if response.status_code != 200:
         print(f"讀取資料錯誤 (狀態碼: {response.status_code})")
+        print(f"錯誤訊息: {response.text}")
         return
         
     try:

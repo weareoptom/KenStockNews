@@ -52,11 +52,13 @@ def build_report():
             ma20 = indicators.get("ma20")
             if rsi and ma20:
                 report += f"RSI(14): {rsi:.1f} | 20MA: {ma20:.2f}\n"
-            for sig in indicators.get("signals", []):
-                report += f"{sig}\n"
+            signals = indicators.get("signals")
+            if signals:
+                for sig in signals:
+                    report += f"{sig}\n"
                 
         # 抓取新聞
-        news_list = fetch_latest_news(symbol, limit=2)
+        news_list = fetch_latest_news(symbol, limit=2, name=name)
         if news_list:
             report += "📰 相關新聞:\n"
             for n in news_list:

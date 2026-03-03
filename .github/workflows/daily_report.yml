@@ -30,12 +30,12 @@ jobs:
           
       - name: Inject Secrets into config.json
         run: |
-          # 讀取原本的 config.json，並將 secrets 注入進去
+          # 讀取原本的 config.template.json，並將 secrets 注入進去
           python -c "
           import json
           import os
           
-          with open('config.json', 'r', encoding='utf-8') as f:
+          with open('config.template.json', 'r', encoding='utf-8') as f:
               data = json.load(f)
               
           data['telegram']['bot_token'] = os.environ.get('TG_BOT_TOKEN')
@@ -48,5 +48,6 @@ jobs:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           
+
       - name: Run Main Script
         run: python main.py

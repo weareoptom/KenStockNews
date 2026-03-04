@@ -1,10 +1,80 @@
 {
     "targets": [
-        { "symbol": "GC=F", "name": "黃金 (Gold)", "type": "commodity" },
-        { "symbol": "BTC-USD", "name": "比特幣 (Bitcoin)", "type": "crypto" },
-        { "symbol": "^GSPC", "name": "S&P 500 指數", "type": "index" },
-        { "symbol": "AAPL", "name": "蘋果公司 (Apple)", "type": "stock" },
-        { "symbol": "2800.HK", "name": "盈富基金", "type": "stock" }
+        {
+            "symbol": "GC=F",
+            "name": "黃金 (Gold)",
+            "type": "commodity"
+        },
+        {
+            "symbol": "BTC-USD",
+            "name": "比特幣 (Bitcoin)",
+            "type": "crypto"
+        },
+        {
+            "symbol": "^GSPC",
+            "name": "S&P 500 指數",
+            "type": "index"
+        },
+        {
+            "symbol": "AAPL",
+            "name": "蘋果公司 (Apple)",
+            "type": "stock"
+        },
+        {
+            "symbol": "2800.HK",
+            "name": "盈富基金",
+            "type": "stock"
+        },
+        {
+            "symbol": "0700.HK",
+            "name": "騰訊 (Tencent)",
+            "type": "stock"
+        },
+        {
+            "symbol": "9988.HK",
+            "name": "阿里巴巴 (Alibaba)",
+            "type": "stock"
+        },
+        {
+            "symbol": "1810.HK",
+            "name": "小米 (Xiaomi)",
+            "type": "stock"
+        },
+        {
+            "symbol": "0388.HK",
+            "name": "港交所 (HKEX)",
+            "type": "stock"
+        },
+        {
+            "symbol": "1211.HK",
+            "name": "比亞迪 (BYD)",
+            "type": "stock"
+        },
+        {
+            "symbol": "0005.HK",
+            "name": "匯豐控股 (HSBC)",
+            "type": "stock"
+        },
+        {
+            "symbol": "0939.HK",
+            "name": "建設銀行 (CCB)",
+            "type": "stock"
+        },
+        {
+            "symbol": "VHY.AX",
+            "name": "Vanguard Australian Shares High Yield ETF",
+            "type": "stock"
+        },
+        {
+            "symbol": "TSLA",
+            "name": "特斯拉 (Tesla)",
+            "type": "stock"
+        },
+        {
+            "symbol": "CL=F",
+            "name": "國際油價 (WTI Crude)",
+            "type": "commodity"
+        }
     ],
     "telegram": {
         "bot_token": "",

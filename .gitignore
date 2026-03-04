@@ -12,5 +12,5 @@ ENV/
 env.bak/
 venv.bak/
 
-# 避免不小心把含有 Token 的 config 傳上去
-config.json
+# 密碼已經移到 .env，.env 不需要上傳
+.env

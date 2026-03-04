@@ -4,6 +4,9 @@ from fetcher import fetch_data, get_latest_price
 from analysis import compute_indicators
 from news import fetch_latest_news
 from notifier import send_telegram_message
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def load_config():
     config_path = os.path.join(os.path.dirname(__file__), "config.json")
@@ -66,7 +69,12 @@ def build_report():
                 
         report += "\n"
         
-    return report, config.get("telegram", {})
+    tg_config = {
+        "bot_token": os.environ.get("TG_BOT_TOKEN", ""),
+        "chat_id": os.environ.get("TG_CHAT_ID", "")
+    }
+        
+    return report, tg_config
 
 if __name__ == "__main__":
     print("=" * 40)

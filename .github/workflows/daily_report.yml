@@ -28,25 +28,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
-      - name: Inject Secrets into config.json
+      - name: Create .env File
         run: |
-          # 讀取原本的 config.template.json，並將 secrets 注入進去
-          python -c "
-          import json
-          import os
-          
-          with open('config.template.json', 'r', encoding='utf-8') as f:
-              data = json.load(f)
-              
-          data['telegram']['bot_token'] = os.environ.get('TG_BOT_TOKEN')
-          data['telegram']['chat_id'] = os.environ.get('TG_CHAT_ID')
-          
-          with open('config.json', 'w', encoding='utf-8') as f:
-              json.dump(data, f, ensure_ascii=False, indent=4)
-          "
-        env:
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          echo "TG_BOT_TOKEN=${{ secrets.TG_BOT_TOKEN }}" >> .env
+          echo "TG_CHAT_ID=${{ secrets.TG_CHAT_ID }}" >> .env
           
 
       - name: Run Main Script

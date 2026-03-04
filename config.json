@@ -75,9 +75,5 @@
             "name": "國際油價 (WTI Crude)",
             "type": "commodity"
         }
-    ],
-    "telegram": {
-        "bot_token": "",
-        "chat_id": ""
-    }
+    ]
 }
